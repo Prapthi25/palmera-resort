@@ -1,0 +1,225 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom Colors mapped to utility classes (e.g., bg-cream, text-gold) */
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-ivory: var(--ivory);
+  --color-forest: var(--forest);
+  --color-forest-light: var(--forest-light);
+  --color-sage: var(--sage);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-dark: var(--dark);
+  --color-dark-soft: var(--dark-soft);
+  --color-text-muted: var(--text-muted);
+
+  /* Font Families mapped to utility classes (e.g., font-display, font-sans) */
+  --font-display: var(--font-cormorant), serif;
+  --font-sans: var(--font-dm-sans), sans-serif;
+
+  /* Theme Transitions */
+  --transition-reveal: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  /* Color Tokens */
+  --cream:        #F6F0E4;
+  --cream-dark:   #EDE4D0;
+  --ivory:        #FAF7F0;
+  --forest:       #2B4A2B;
+  --forest-light: #3D6140;
+  --sage:         #6B8F5E;
+  --gold:         #C5952A;
+  --gold-light:   #D4AA4A;
+  --dark:         #1A1A12;
+  --dark-soft:    #2C2C1E;
+  --text-muted:   #6B6558;
+
+  /* Background/Foreground for system-level styles */
+  --background: var(--ivory);
+  --foreground: var(--dark);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Potential future dark mode overrides can go here */
+  }
+}
+
+
+/* ─── Base ─────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--ivory);
+  color: var(--dark);
+  font-family: var(--font-dm-sans), sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── Typography ────────────────────────────────── */
+.font-display {
+  font-family: var(--font-cormorant), serif;
+}
+
+.heading-xl {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.heading-lg {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.heading-md {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.label-tag {
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ─── Scroll Reveal ─────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ─── Gold Divider ──────────────────────────────── */
+.gold-divider {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  display: inline-block;
+}
+
+/* ─── Section Padding ───────────────────────────── */
+.section-pad {
+  padding: 6rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding: 8rem 2rem;
+  }
+}
+
+/* ─── Animations ────────────────────────────────── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-fade-down { animation: fadeDown 0.7s ease forwards; }
+.animate-fade-up   { animation: fadeUp  0.7s ease forwards; }
+.animate-scale-in  { animation: scaleIn 0.7s ease forwards; }
+
+/* ─── Custom Scrollbar ──────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 3px; }
+
+/* ─── Image Overlay Utilities ───────────────────── */
+.img-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.img-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(26,26,18,0.7) 100%);
+}
+
+/* ─── Gold Button ───────────────────────────────── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.75rem;
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-gold:hover {
+  background: var(--gold);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(197,149,42,0.25);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.8);
+  transform: translateY(-1px);
+}
